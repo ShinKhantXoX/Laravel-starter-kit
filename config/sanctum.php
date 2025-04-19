@@ -46,7 +46,7 @@ return [
     |
     */
 
-    'expiration' => (int) env('ACCESS_TOKEN_EXPIRATION_TIME', 5),
+    'expiration' => (int) env('ACCESS_TOKEN_EXPIRATION_TIME', 60),
     'rt_expiration' => (int) env('REFRESH_TOKEN_EXPIRATION_TIME', 24 * 60),
 
     /*
