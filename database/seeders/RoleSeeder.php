@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\PermissionEnum;
 use App\Enums\RoleTypeEnum;
 use App\Helpers\Enum;
 use Exception;
@@ -28,11 +29,12 @@ class RoleSeeder extends Seeder
                     $createRole->syncPermissions(Permission::pluck('name')->toArray());
                 }
 
-                // Assign specific permissions to MANAGER by permission names (not IDs)
+                // MANAGER: can browse users (list + show), not create/update/delete/export
                 if ($createRole->name === RoleTypeEnum::MANAGER->value) {
-                    $per = Permission::pluck('name')->toArray();
-                    $managerPermissions = [$per[2], $per[3], $per[4]]; // Replace with actual permission names
-                    $createRole->syncPermissions($managerPermissions);
+                    $createRole->syncPermissions([
+                        PermissionEnum::USER_INDEX->value,
+                        PermissionEnum::USER_SHOW->value,
+                    ]);
                 }
 
                 if ($createRole->name === RoleTypeEnum::CASHEAR->value) {

@@ -52,10 +52,10 @@ class QueryBuilderHelper
     {
         $requestQuery = app('request')->query();
         $page = isset($requestQuery['page']) ? $requestQuery['page'] : null;
-        $perPage = isset($requestQuery['per_page']) ? $requestQuery['per_page'] : null;
+        $perPage = $requestQuery['per_page'] ?? $requestQuery['rows'] ?? null;
 
         if ($page && $perPage) {
-            return $builder->paginate(perPage: $perPage, page: $page)->appends($requestQuery);
+            return $builder->paginate(perPage: (int) $perPage, page: (int) $page)->appends($requestQuery);
         }
 
         return $builder->get();
