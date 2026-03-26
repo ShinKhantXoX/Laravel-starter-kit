@@ -11,7 +11,7 @@ trait HttpApiResponse
     public function successResponse($data = [], $message = 'Success.', $code = Response::HTTP_OK): JsonResponse
     {
         return response()->json([
-            'status' => true,
+            'status' => $code,
             'data' => $data,
             'message' => $message
         ], $code);
