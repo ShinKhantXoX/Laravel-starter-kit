@@ -16,6 +16,7 @@ use App\Http\Controllers\Dashboard\{
     MenuController,
     OrderController,
     OrderListController,
+    StatusController
 };
 
 
@@ -59,6 +60,10 @@ Route::prefix('v1')->group(function () {
             //     Route::delete('/{id}', 'destroy');  // Delete a user
             // });
 
+        });
+
+        Route::controller(StatusController::class)->prefix("status")->group(function () {
+            Route::get('/', 'index');
         });
 
         Route::controller(UserController::class)->prefix('users')->group(function () {
